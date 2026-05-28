@@ -1,8 +1,8 @@
-package com.example.transactions.controller
+package dev.dshamsani.transactions.controller
 
 
-import com.example.transactions.dto.shared.ErrorResponse
-import com.example.transactions.exception.TransactionNotFoundException
+import dev.dshamsani.transactions.dto.shared.ErrorResponse
+import dev.dshamsani.transactions.exception.TransactionNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

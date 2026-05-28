@@ -1,16 +1,15 @@
-package com.example.transactions.service
+package dev.dshamsani.transactions.service
 
-import com.example.transactions.dto.TransactionDto
-import com.example.transactions.dto.CreateTransactionRequest
-import com.example.transactions.dto.PatchTransactionRequest
-import com.example.transactions.dto.UpdateTransactionRequest
-import com.example.transactions.dto.shared.PagedResponse
-import com.example.transactions.dto.shared.toPagedResponse
-import com.example.transactions.dto.toDto
-import com.example.transactions.dto.toEntity
-import com.example.transactions.exception.TransactionNotFoundException
-import com.example.transactions.repository.TransactionRepository
-import org.springframework.data.domain.Page
+import dev.dshamsani.transactions.dto.TransactionDto
+import dev.dshamsani.transactions.dto.CreateTransactionRequest
+import dev.dshamsani.transactions.dto.PatchTransactionRequest
+import dev.dshamsani.transactions.dto.UpdateTransactionRequest
+import dev.dshamsani.transactions.dto.shared.PagedResponse
+import dev.dshamsani.transactions.dto.shared.toPagedResponse
+import dev.dshamsani.transactions.dto.toDto
+import dev.dshamsani.transactions.dto.toEntity
+import dev.dshamsani.transactions.exception.TransactionNotFoundException
+import dev.dshamsani.transactions.repository.TransactionRepository
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

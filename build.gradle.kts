@@ -6,7 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
 }
 
-group = "com.example"
+group = "dev.dshamsani"
 version = "1.0-SNAPSHOT"
 
 repositories {

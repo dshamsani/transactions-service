@@ -1,6 +1,6 @@
-package com.example.transactions.dto
+package dev.dshamsani.transactions.dto
 
-import com.example.transactions.model.Transaction
+import dev.dshamsani.transactions.model.Transaction
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size

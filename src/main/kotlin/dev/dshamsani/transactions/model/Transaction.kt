@@ -1,4 +1,4 @@
-package com.example.transactions.model
+package dev.dshamsani.transactions.model
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Table

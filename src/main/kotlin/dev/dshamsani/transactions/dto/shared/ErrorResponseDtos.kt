@@ -1,4 +1,4 @@
-package com.example.transactions.dto.shared
+package dev.dshamsani.transactions.dto.shared
 
 import java.time.LocalDateTime
 

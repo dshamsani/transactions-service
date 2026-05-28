@@ -1,12 +1,11 @@
-package com.example.transactions.controller
+package dev.dshamsani.transactions.controller
 
-import com.example.transactions.dto.CreateTransactionRequest
-import com.example.transactions.dto.PatchTransactionRequest
-import com.example.transactions.dto.TransactionDto
-import com.example.transactions.dto.UpdateTransactionRequest
-import com.example.transactions.dto.shared.PagedResponse
-import com.example.transactions.dto.shared.toPagedResponse
-import com.example.transactions.service.TransactionService
+import dev.dshamsani.transactions.dto.CreateTransactionRequest
+import dev.dshamsani.transactions.dto.PatchTransactionRequest
+import dev.dshamsani.transactions.dto.TransactionDto
+import dev.dshamsani.transactions.dto.UpdateTransactionRequest
+import dev.dshamsani.transactions.dto.shared.PagedResponse
+import dev.dshamsani.transactions.service.TransactionService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault

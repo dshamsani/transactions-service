@@ -1,4 +1,4 @@
-package com.example.transactions
+package dev.dshamsani.transactions
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
