@@ -15,7 +15,15 @@ data class TransactionDto(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val amount: BigDecimal,
-    val account: AccountDto,
+    val account: CompactAccountDto,
+)
+
+data class CompactTransactionDto(
+    val id: Long,
+    val description: String,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime,
+    val amount: BigDecimal,
 )
 
 data class CreateTransactionRequest(
@@ -57,6 +65,14 @@ fun Transaction.toDto(): TransactionDto = TransactionDto(
     description = this.description,
     createdAt = this.createdAt,
     updatedAt = this.updatedAt,
-    account = this.account.toDto()
+    account = this.account.toCompactDto()
+)
+
+fun Transaction.toCompactDto(): CompactTransactionDto = CompactTransactionDto(
+    id = this.id,
+    amount = this.amount,
+    description = this.description,
+    createdAt = this.createdAt,
+    updatedAt = this.updatedAt,
 )
 

@@ -8,7 +8,14 @@ import java.math.BigDecimal
 data class AccountDto(
     val id: Long,
     val owner: String,
-    val balance: BigDecimal
+    val balance: BigDecimal,
+    val transactions: List<CompactTransactionDto>
+)
+
+data class CompactAccountDto(
+    val id: Long,
+    val owner: String,
+    val balance: BigDecimal,
 )
 
 
@@ -25,7 +32,14 @@ data class CreateAccountRequest(
 fun Account.toDto(): AccountDto = AccountDto(
     id = this.id,
     owner = this.owner,
-    balance = this.balance
+    balance = this.balance,
+    transactions = this.transactions.map { it.toCompactDto() }
+)
+
+fun Account.toCompactDto(): CompactAccountDto = CompactAccountDto(
+    id = this.id,
+    owner = this.owner,
+    balance = this.balance,
 )
 
 fun CreateAccountRequest.toAccount(): Account = Account(

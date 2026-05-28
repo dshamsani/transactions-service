@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/accounts")
-class AccountController (private val accountService: AccountService) {
+class AccountController(private val accountService: AccountService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createAccount(@Valid @RequestBody account: CreateAccountRequest): AccountDto {
         return accountService.create(account)
+    }
+
+    @GetMapping
+    fun getAccounts(): List<AccountDto> {
+        return accountService.getAll()
     }
 
     @GetMapping("/{id}")
