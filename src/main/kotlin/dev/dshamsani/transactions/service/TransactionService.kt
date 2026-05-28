@@ -19,7 +19,7 @@ import java.time.LocalDateTime
 
 @Service
 class TransactionService(
-    private val repository: TransactionRepository,
+    private val transactionRepository: TransactionRepository,
     private val accountRepository: AccountRepository
 ) {
     fun create(transactionRequest: CreateTransactionRequest): TransactionDto {
@@ -32,36 +32,36 @@ class TransactionService(
             account = account
         )
 
-        return repository.save(transaction).toDto()
+        return transactionRepository.save(transaction).toDto()
     }
 
     fun getById(id: Long): TransactionDto {
-        return repository.findById(id).orElseThrow { TransactionNotFoundException(id) }
+        return transactionRepository.findById(id).orElseThrow { TransactionNotFoundException(id) }
             .toDto()
     }
 
     fun getAll(pageable: Pageable): PagedResponse<TransactionDto> {
-        return repository.findAll(pageable).map { it.toDto() }.toPagedResponse()
+        return transactionRepository.findAll(pageable).map { it.toDto() }.toPagedResponse()
     }
 
     fun delete(id: Long) {
-        if (!repository.existsById(id)) {
+        if (!transactionRepository.existsById(id)) {
             throw TransactionNotFoundException(id)
         }
 
-        repository.deleteById(id)
+        transactionRepository.deleteById(id)
     }
 
     @Transactional
     fun update(id: Long, transactionRequest: UpdateTransactionRequest): TransactionDto {
         val transaction =
-            repository.findById(id).orElseThrow { TransactionNotFoundException(id) }
+            transactionRepository.findById(id).orElseThrow { TransactionNotFoundException(id) }
 
         transaction.amount = transactionRequest.amount
         transaction.description = transactionRequest.description
         transaction.updatedAt = LocalDateTime.now()
 
-        val updated = repository.save(transaction)
+        val updated = transactionRepository.save(transaction)
 
         return updated.toDto()
     }
@@ -69,13 +69,13 @@ class TransactionService(
     @Transactional
     fun patch(id: Long, transactionRequest: PatchTransactionRequest): TransactionDto {
         val transaction =
-            repository.findById(id).orElseThrow { TransactionNotFoundException(id) }
+            transactionRepository.findById(id).orElseThrow { TransactionNotFoundException(id) }
 
         transactionRequest.amount?.let { transaction.amount = it }
         transactionRequest.description?.let { transaction.description = it }
         transaction.updatedAt = LocalDateTime.now()
 
-        val updated = repository.save(transaction)
+        val updated = transactionRepository.save(transaction)
 
         return updated.toDto()
     }
