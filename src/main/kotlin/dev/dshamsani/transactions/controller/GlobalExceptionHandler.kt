@@ -2,7 +2,7 @@ package dev.dshamsani.transactions.controller
 
 
 import dev.dshamsani.transactions.dto.shared.ErrorResponse
-import dev.dshamsani.transactions.exception.TransactionNotFoundException
+import dev.dshamsani.transactions.exception.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -26,8 +26,8 @@ class GlobalExceptionHandler {
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }
 
-    @ExceptionHandler(TransactionNotFoundException::class)
-    fun handleNotFoundException(e: TransactionNotFoundException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(NotFoundException::class)
+    fun handleNotFoundException(e: NotFoundException): ResponseEntity<ErrorResponse> {
         val error = ErrorResponse(
             status = HttpStatus.NOT_FOUND.value(),
             error = HttpStatus.NOT_FOUND.reasonPhrase,

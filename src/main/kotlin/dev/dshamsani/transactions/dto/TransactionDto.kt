@@ -24,7 +24,10 @@ data class CreateTransactionRequest(
 
     @field:NotBlank
     @field:Size(max = 500)
-    val description: String
+    val description: String,
+
+    @field:NotNull
+    val accountId: Long
 )
 
 data class UpdateTransactionRequest(
@@ -55,7 +58,3 @@ fun Transaction.toDto(): TransactionDto = TransactionDto(
     updatedAt = this.updatedAt
 )
 
-fun CreateTransactionRequest.toEntity(): Transaction = Transaction(
-    amount = this.amount,
-    description = this.description
-)

@@ -37,8 +37,8 @@ class TransactionController (private val transactionService: TransactionService)
     }
 
     @GetMapping("/{id}")
-    fun getTransaction(@PathVariable id: Long): TransactionDto {
-        return transactionService.getById(id)
+    fun getTransaction(@PathVariable transactionId: Long): TransactionDto {
+        return transactionService.getById(transactionId)
     }
 
     @DeleteMapping("/{id}")

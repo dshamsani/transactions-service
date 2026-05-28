@@ -7,8 +7,10 @@ import dev.dshamsani.transactions.dto.UpdateTransactionRequest
 import dev.dshamsani.transactions.dto.shared.PagedResponse
 import dev.dshamsani.transactions.dto.shared.toPagedResponse
 import dev.dshamsani.transactions.dto.toDto
-import dev.dshamsani.transactions.dto.toEntity
+import dev.dshamsani.transactions.exception.AccountNotFoundException
 import dev.dshamsani.transactions.exception.TransactionNotFoundException
+import dev.dshamsani.transactions.model.Transaction
+import dev.dshamsani.transactions.repository.AccountRepository
 import dev.dshamsani.transactions.repository.TransactionRepository
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -16,10 +18,21 @@ import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service
-class TransactionService(private val repository: TransactionRepository) {
+class TransactionService(
+    private val repository: TransactionRepository,
+    private val accountRepository: AccountRepository
+) {
     fun create(transactionRequest: CreateTransactionRequest): TransactionDto {
+        val account = accountRepository.findById(transactionRequest.accountId)
+            .orElseThrow { AccountNotFoundException(transactionRequest.accountId) }
 
-        return repository.save(transactionRequest.toEntity()).toDto()
+        val transaction = Transaction(
+            amount = transactionRequest.amount,
+            description = transactionRequest.description,
+            account = account
+        )
+
+        return repository.save(transaction).toDto()
     }
 
     fun getById(id: Long): TransactionDto {
