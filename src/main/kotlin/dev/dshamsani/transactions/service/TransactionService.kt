@@ -13,6 +13,7 @@ import dev.dshamsani.transactions.model.Transaction
 import dev.dshamsani.transactions.repository.AccountRepository
 import dev.dshamsani.transactions.repository.TransactionRepository
 import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime

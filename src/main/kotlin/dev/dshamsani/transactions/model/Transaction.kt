@@ -33,6 +33,7 @@ class Transaction(
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
     @ManyToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "account_id", nullable = false)
     val account: Account
 )
