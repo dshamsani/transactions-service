@@ -13,5 +13,7 @@ interface TransactionRepository: JpaRepository<Transaction, Long> {
 
     @EntityGraph(attributePaths = ["account"])
     override fun findAll(pageable: Pageable): Page<Transaction>
+
+    fun findByAccountId(accountId: Long, pageable: Pageable): Page<Transaction>
 }
 

@@ -8,4 +8,5 @@ interface AccountRepository: JpaRepository<Account, Long> {
 
     @EntityGraph(attributePaths = ["transactions"])
     override fun findAll(): List<Account>
+
 }

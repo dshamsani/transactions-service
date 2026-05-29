@@ -1,9 +1,13 @@
 package dev.dshamsani.transactions.controller
 
 import dev.dshamsani.transactions.dto.AccountDto
+import dev.dshamsani.transactions.dto.CompactTransactionDto
 import dev.dshamsani.transactions.dto.CreateAccountRequest
+import dev.dshamsani.transactions.dto.shared.PagedResponse
 import dev.dshamsani.transactions.service.AccountService
 import jakarta.validation.Valid
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -31,6 +35,11 @@ class AccountController(private val accountService: AccountService) {
     @GetMapping("/{id}")
     fun getAccount(@PathVariable id: Long): AccountDto {
         return accountService.getById(id)
+    }
+
+    @GetMapping("/{id}/transactions")
+    fun getAccountTransactions(@PathVariable id: Long, @PageableDefault(size = 20)  pageable: Pageable): PagedResponse<CompactTransactionDto> {
+        return accountService.getTransactionsByAccountId(id, pageable)
     }
 
 }
