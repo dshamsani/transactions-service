@@ -3,6 +3,7 @@ package dev.dshamsani.transactions.controller
 import dev.dshamsani.transactions.dto.AccountDto
 import dev.dshamsani.transactions.dto.CompactTransactionDto
 import dev.dshamsani.transactions.dto.CreateAccountRequest
+import dev.dshamsani.transactions.dto.TransferAmountRequest
 import dev.dshamsani.transactions.dto.shared.PagedResponse
 import dev.dshamsani.transactions.service.AccountService
 import jakarta.validation.Valid
@@ -40,6 +41,12 @@ class AccountController(private val accountService: AccountService) {
     @GetMapping("/{id}/transactions")
     fun getAccountTransactions(@PathVariable id: Long, @PageableDefault(size = 20)  pageable: Pageable): PagedResponse<CompactTransactionDto> {
         return accountService.getTransactionsByAccountId(id, pageable)
+    }
+
+    @PostMapping("/transfer")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun transferBetweenAccount(@Valid @RequestBody transfer: TransferAmountRequest) {
+        accountService.transfer(transfer)
     }
 
 }

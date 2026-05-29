@@ -3,6 +3,7 @@ package dev.dshamsani.transactions.service
 import dev.dshamsani.transactions.dto.AccountDto
 import dev.dshamsani.transactions.dto.CompactTransactionDto
 import dev.dshamsani.transactions.dto.CreateAccountRequest
+import dev.dshamsani.transactions.dto.TransferAmountRequest
 import dev.dshamsani.transactions.dto.shared.PagedResponse
 import dev.dshamsani.transactions.dto.shared.toPagedResponse
 import dev.dshamsani.transactions.dto.toAccount
@@ -36,5 +37,17 @@ class AccountService(private val accountRepository: AccountRepository, private v
 
     fun getTransactionsByAccountId(accountId: Long, pageable: Pageable): PagedResponse<CompactTransactionDto> {
         return transactionRepository.findByAccountId(accountId, pageable).map { it.toCompactDto()}.toPagedResponse()
+    }
+
+    @Transactional
+    fun transfer(transfer: TransferAmountRequest) {
+        val from = accountRepository.findById(transfer.fromId).orElseThrow { AccountNotFoundException(transfer.fromId) }
+        val to = accountRepository.findById(transfer.toId).orElseThrow { AccountNotFoundException(transfer.toId) }
+
+        from.balance -= transfer.amount
+        accountRepository.save(from)
+
+        to.balance += transfer.amount
+        accountRepository.save(to)
     }
 }

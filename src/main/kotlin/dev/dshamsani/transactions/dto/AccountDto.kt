@@ -28,6 +28,12 @@ data class CreateAccountRequest(
     val balance: BigDecimal
 )
 
+data class TransferAmountRequest(
+    val fromId: Long,
+    val toId: Long,
+    val amount: BigDecimal
+)
+
 
 fun Account.toDto(): AccountDto = AccountDto(
     id = this.id,
